@@ -7,11 +7,19 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
+    "web": "vite",
+    "web:build": "tsc && vite build",
+    "web:preview": "vite preview",
     "test": "jest"
   },
   "dependencies": {
+    "@vitejs/plugin-react": "^3.1.0",
+    "babel-plugin-react-native-web": "^0.18.12",
     "react": "18.2.0",
-    "react-native": "0.71.2"
+    "react-dom": "^18.2.0",
+    "react-native": "0.71.2",
+    "react-native-web": "^0.18.12",
+    "vite": "^4.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
@@ -21,6 +29,7 @@
     "@tsconfig/react-native": "^2.0.2",
     "@types/jest": "^29.2.1",
     "@types/react": "^18.0.24",
+    "@types/react-dom": "^18.0.11",
     "@types/react-test-renderer": "^18.0.0",
     "babel-jest": "^29.2.1",
     "eslint": "^8.19.0",
