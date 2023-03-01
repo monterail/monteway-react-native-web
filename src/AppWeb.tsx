@@ -1,11 +1,12 @@
 
 import React from 'react';
 import { Text } from 'react-native'
+import WebRouter from './navigation/web/WebRouter';
 
 function App() {
   return (
     <div>
-      <Text>Monteway React Native Web template</Text>
+      <WebRouter />
     </div>
   );
 }
