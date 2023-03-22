@@ -9,14 +9,22 @@
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "pods": "npx pod-install ios",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "web": "vite",
+    "web:build": "tsc && vite build",
+    "web:preview": "vite preview"
   },
   "dependencies": {
     "@sentry/react-native": "^5.1.1",
     "react": "18.2.0",
     "react-native": "0.71.4",
     "react-native-bootsplash": "^4.5.3",
-    "react-native-config": "^1.4.2"
+    "react-native-config": "^1.4.2",
+    "@types/react-dom": "^18.0.11",
+    "@vitejs/plugin-react": "^3.1.0",
+    "babel-plugin-react-native-web": "^0.18.12",
+    "react-dom": "^18.2.0",
+    "vite": "^4.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
