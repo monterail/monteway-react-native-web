@@ -1,20 +1,16 @@
-import React, { useEffect } from 'react';
-import { SafeAreaView, Text } from 'react-native';
-import RNBootSplash from 'react-native-bootsplash';
+import React from 'react';
 
-import { initSentry } from '@/services/sentry';
+import { NavigationContainer } from '@react-navigation/native';
+import AppStackMobile from '@/navigation/mobile/AppStackMobile';
 
-function AppMobile() {
-  useEffect(() => {
-    RNBootSplash.hide({ fade: true });
-    initSentry();
-  }, []);
-
+function AppMobile(): JSX.Element {
   return (
-    <SafeAreaView>
-      <Text>Hello World!</Text>
-    </SafeAreaView>
+    <NavigationContainer>
+      <AppStackMobile />
+    </NavigationContainer>
   );
 }
+
+
 
 export default AppMobile;

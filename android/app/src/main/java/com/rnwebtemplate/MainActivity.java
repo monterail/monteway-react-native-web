@@ -26,6 +26,11 @@ public class MainActivity extends ReactActivity {
     return new MainActivityDelegate(this, getMainComponentName());
   }
 
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(null);
+  }
+
   public static class MainActivityDelegate extends ReactActivityDelegate {
 
     public MainActivityDelegate(ReactActivity activity, String mainComponentName) {

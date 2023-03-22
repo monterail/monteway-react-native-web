@@ -1,12 +1,14 @@
-import React, { useEffect } from 'react';
-import { SafeAreaView, Text } from 'react-native';
 
-function AppWeb() {
+import React from 'react';
+import { Text } from 'react-native'
+import WebRouter from './navigation/web/WebRouter';
+
+function App() {
   return (
-    <SafeAreaView>
-      <Text>Hello World!</Text>
-    </SafeAreaView>
+    <div>
+      <WebRouter />
+    </div>
   );
 }
 
-export default AppWeb;
+export default App;
