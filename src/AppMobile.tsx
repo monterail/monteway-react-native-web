@@ -4,7 +4,7 @@ import RNBootSplash from 'react-native-bootsplash';
 
 import { initSentry } from '@/services/sentry';
 
-function App() {
+function AppMobile() {
   useEffect(() => {
     RNBootSplash.hide({ fade: true });
     initSentry();
@@ -17,4 +17,4 @@ function App() {
   );
 }
 
-export default App;
+export default AppMobile;
