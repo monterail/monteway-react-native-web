@@ -211,4 +211,4 @@ declare module 'react-native' {
   }
 }
 
-export { };
+export {};

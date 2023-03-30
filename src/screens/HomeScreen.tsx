@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-
 import { View, Text } from 'react-native';
 
 const HomeScreen: FC<{}> = () => {
@@ -8,8 +7,6 @@ const HomeScreen: FC<{}> = () => {
       <Text>Home Screen</Text>
     </View>
   );
-}
-
-
+};
 
 export default HomeScreen;
