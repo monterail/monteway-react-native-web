@@ -12,5 +12,6 @@
 
 - ios: run `yarn ios` command
 - android: run `yarn android` command
+- web: run `yarn web` command
 
 ##### If you encounter any troubles with launching application you can try to build it with Xcode or AndroidStudio

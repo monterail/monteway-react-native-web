@@ -8,7 +8,7 @@ To make your life easier we've prepared this template with some stuff (e.g. libr
 #### To create fresh project based on the template just run:
 
 ```
-react-native init --template https://github.com/monterail/react-native-template "ProjectName"
+react-native init --template https://github.com/monterail/monteway-react-native-web "ProjectName"
 ```
 Make sure that you have new version of `react-native` installed globally or run with `npx`.
 
