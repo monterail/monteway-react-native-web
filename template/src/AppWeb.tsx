@@ -2,11 +2,9 @@ import React from 'react';
 
 import WebRouter from './navigation/web/WebRouter';
 
-function App() {
+const App = () => {
   return (
-    <div>
-      <WebRouter />
-    </div>
+    <WebRouter />
   );
 }
 

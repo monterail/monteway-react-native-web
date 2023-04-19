@@ -6,7 +6,7 @@ import RNBootSplash from 'react-native-bootsplash';
 import AppStackMobile from '@/navigation/mobile/AppStackMobile';
 import { initSentry } from '@/services/sentry';
 
-function AppMobile(): JSX.Element {
+const AppMobile = (): JSX.Element => {
   useEffect(() => {
     RNBootSplash.hide({ fade: true });
     initSentry();
