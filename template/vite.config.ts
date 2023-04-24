@@ -19,16 +19,16 @@ export default defineConfig(({ mode }) => {
         'react-native': 'react-native-web',
       },
       extensions: [
+        '.web.ts',
+        '.web.tsx',
+        '.web.js',
+        '.web.jsx',
         '.mjs',
         '.js',
         '.ts',
         '.jsx',
         '.tsx',
         '.json',
-        '.web.ts',
-        '.web.tsx',
-        '.web.js',
-        '.web.jsx',
       ],
     },
     define: {
@@ -47,7 +47,7 @@ export default defineConfig(({ mode }) => {
     optimizeDeps: {
       esbuildOptions: {
         mainFields: ['module', 'main'],
-        resolveExtensions: ['.web.js', '.js', '.ts'],
+        resolveExtensions: ['.web.js', '.web.ts', '.js', '.ts'],
       },
     },
     plugins: [
