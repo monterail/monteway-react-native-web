@@ -1,6 +1,164 @@
 declare module 'react-native' {
   // The following list is sourced from:
-  // - https://github.com/necolas/react-native-web/blob/0.17.5/packages/react-native-web/src/types/styles.js#L76
+  // https://github.com/necolas/react-native-web/blob/master/packages/react-native-web/src/types/styles.js
+  type ColorValue = null | string;
+
+  type DimensionValue = null | number | string;
+
+  type EdgeInsetsValue = {
+    top: number,
+    left: number,
+    right: number,
+    bottom: number
+  };
+
+  type GenericStyleProp<T> =
+    | null
+    | void
+    | $ReadOnly<T>
+    | false
+    | ''
+    | $ReadOnlyArray<GenericStyleProp<T>>;
+
+  type LayoutValue = {
+    x: number,
+    y: number,
+    width: number,
+    height: number
+  };
+
+  type LayoutEvent = {
+    nativeEvent: {
+      layout: LayoutValue,
+      target: any
+    },
+    timeStamp: number
+  };
+
+  type PointValue = {
+    x: number,
+    y: number
+  };
+
+  type LayoutCallback = (
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    left: number,
+    top: number
+  ) => void;
+
+  type MeasureInWindowCallback = (
+    left: number,
+    top: number,
+    width: number,
+    height: number
+  ) => void;
+
+  // Mixin to HTMLElement that represents additions from the `usePlatformMethods` hook
+  interface PlatformMethods {
+    blur: () => void;
+    focus: () => void;
+    measure: (callback: LayoutCallback) => void;
+    measureInWindow: (callback: MeasureInWindowCallback) => void;
+    measureLayout: (
+      relativeToNativeNode: {},
+      onSuccess: LayoutCallback,
+      onFail: () => void
+    ) => void;
+  }
+  type NumberOrString = number | string;
+
+  /**
+   * Animations and transitions
+   */
+
+  type AnimationDirection =
+    | 'alternate'
+    | 'alternate-reverse'
+    | 'normal'
+    | 'reverse';
+  type AnimationFillMode = 'none' | 'forwards' | 'backwards' | 'both';
+  type AnimationIterationCount = number | 'infinite';
+  type AnimationKeyframes = string | Object;
+  type AnimationPlayState = 'paused' | 'running';
+
+  type AnimationStyles = {
+    animationDelay?: ?(string | Array<string>),
+    animationDirection?: ?(AnimationDirection | Array<AnimationDirection>),
+    animationDuration?: ?(string | Array<string>),
+    animationFillMode?: ?(AnimationFillMode | Array<AnimationFillMode>),
+    animationIterationCount?: ?(
+      | AnimationIterationCount
+      | Array<AnimationIterationCount>
+    ),
+    animationKeyframes?: ?(AnimationKeyframes | Array<AnimationKeyframes>),
+    animationPlayState?: ?(AnimationPlayState | Array<AnimationPlayState>),
+    animationTimingFunction?: ?(string | Array<string>),
+    transitionDelay?: ?(string | Array<string>),
+    transitionDuration?: ?(string | Array<string>),
+    transitionProperty?: ?(string | Array<string>),
+    transitionTimingFunction?: ?(string | Array<string>)
+  };
+
+  /**
+   * Border
+   */
+
+  type BorderRadiusValue = number | string;
+  type BorderStyleValue = 'solid' | 'dotted' | 'dashed';
+
+  type BorderStyles = {
+    // color
+    borderColor?: ?ColorValue,
+    borderBlockColor?: ?ColorValue,
+    borderBlockEndColor?: ?ColorValue,
+    borderBlockStartColor?: ?ColorValue,
+    borderBottomColor?: ?ColorValue,
+    borderInlineColor?: ?ColorValue,
+    borderInlineEndColor?: ?ColorValue,
+    borderInlineStartColor?: ?ColorValue,
+    borderLeftColor?: ?ColorValue,
+    borderRightColor?: ?ColorValue,
+    borderTopColor?: ?ColorValue,
+    // radius
+    borderRadius?: ?BorderRadiusValue,
+    borderEndEndRadius?: ?BorderRadiusValue,
+    borderEndStartRadius?: ?BorderRadiusValue,
+    borderStartEndRadius?: ?BorderRadiusValue,
+    borderStartStartRadius?: ?BorderRadiusValue,
+    borderBottomLeftRadius?: ?BorderRadiusValue,
+    borderBottomRightRadius?: ?BorderRadiusValue,
+    borderTopLeftRadius?: ?BorderRadiusValue,
+    borderTopRightRadius?: ?BorderRadiusValue,
+    // style
+    borderStyle?: ?BorderStyleValue,
+    borderBlockStyle?: ?BorderStyleValue,
+    borderBlockEndStyle?: ?BorderStyleValue,
+    borderBlockStartStyle?: ?BorderStyleValue,
+    borderBottomStyle?: ?BorderStyleValue,
+    borderInlineStyle?: ?BorderStyleValue,
+    borderInlineEndStyle?: ?BorderStyleValue,
+    borderInlineStartStyle?: ?BorderStyleValue,
+    borderLeftStyle?: ?BorderStyleValue,
+    borderRightStyle?: ?BorderStyleValue,
+    borderTopStyle?: ?BorderStyleValue,
+    // deprecated
+    borderEndColor?: ?ColorValue,
+    borderStartColor?: ?ColorValue,
+    borderEndStyle?: ?BorderStyleValue,
+    borderStartStyle?: ?BorderStyleValue,
+    borderBottomEndRadius?: ?BorderRadiusValue,
+    borderBottomStartRadius?: ?BorderRadiusValue,
+    borderTopEndRadius?: ?BorderRadiusValue,
+    borderTopStartRadius?: ?BorderRadiusValue
+  };
+
+  /**
+   * Interactions
+   */
+
   type CursorValue =
     | 'alias'
     | 'all-scroll'
@@ -24,6 +182,7 @@ declare module 'react-native' {
     | 'not-allowed'
     | 'zoom-in'
     | 'zoom-out'
+    // resize
     | 'col-resize'
     | 'e-resize'
     | 'ew-resize'
@@ -39,176 +198,212 @@ declare module 'react-native' {
     | 'nesw-resize'
     | 'nwse-resize';
 
-  // This list is the combination of the following two lists:
-  // - https://github.com/necolas/react-native-web/blob/0.17.5/packages/react-native-web/src/modules/AccessibilityUtil/propsToAriaRole.js#L10
-  // - https://github.com/necolas/react-native-web/blob/0.17.5/packages/react-native-web/src/modules/AccessibilityUtil/propsToAccessibilityComponent.js#L12
-  // Plus the single hard-coded value "label" from here:
-  // - https://github.com/necolas/react-native-web/blob/0.17.5/packages/react-native-web/src/modules/AccessibilityUtil/propsToAccessibilityComponent.js#L36
-  type WebAccessibilityRole =
-    | 'adjustable'
-    | 'article'
-    | 'banner'
-    | 'blockquote'
-    | 'button'
-    | 'code'
-    | 'complementary'
-    | 'contentinfo'
-    | 'deletion'
-    | 'emphasis'
-    | 'figure'
-    | 'form'
-    | 'header'
-    | 'image'
-    | 'imagebutton'
-    | 'insertion'
-    | 'keyboardkey'
-    | 'label'
-    | 'link'
-    | 'list'
-    | 'listitem'
-    | 'main'
-    | 'navigation'
+  type TouchActionValue =
+    | 'auto'
+    | 'inherit'
+    | 'manipulation'
     | 'none'
-    | 'region'
-    | 'search'
-    | 'strong'
-    | 'summary'
-    | 'text';
+    | 'pan-down'
+    | 'pan-left'
+    | 'pan-right'
+    | 'pan-up'
+    | 'pan-x'
+    | 'pan-y'
+    | 'pinch-zoom';
 
-  interface PressableStateCallbackType {
-    hovered?: boolean;
-    focused?: boolean;
-  }
+  type UserSelect = 'all' | 'auto' | 'contain' | 'none' | 'text';
 
-  interface PressableProps {
-    onHoverIn?: (e: MouseEvent) => void;
-    onHoverOut?: (e: MouseEvent) => void;
-  }
+  type InteractionStyles = {
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/cursor#Formal_syntax
+    cursor?: ?CursorValue,
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action#Formal_syntax
+    touchAction?: ?TouchActionValue,
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/user-select#Formal_syntax_2
+    userSelect?: ?UserSelect,
+    willChange?: ?string
+  };
 
-  interface ViewProps {
-    dir?: 'ltr' | 'rtl' | 'auto';
-    accessibilityRole?: WebAccessibilityRole;
-    href?: string;
-    hrefAttrs?: {
-      target?: '_blank' | '_self' | '_top' | 'blank' | 'self' | 'top';
-      rel?: string;
-      download?: boolean;
-    };
-    onMouseDown?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-    onMouseUp?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-    onMouseEnter?: (
-      event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    ) => void;
-    onMouseLeave?: (
-      event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    ) => void;
-    onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-    onFocus?: (event: React.FocusEvent<HTMLDivElement>) => void;
-    onScroll?: (event: React.UIEvent<HTMLDivElement, UIEvent>) => void;
-    // For compatibility with RNW internals
-    onScrollShouldSetResponder?: unknown;
-    onScrollShouldSetResponderCapture?: unknown;
-    onSelectionChangeShouldSetResponder?: unknown;
-    onSelectionChangeShouldSetResponderCapture?: unknown;
-  }
+  /**
+   * Layout
+   */
 
-  interface TextProps {
-    dir?: 'ltr' | 'rtl' | 'auto';
-    focusable?: boolean;
-    accessibilityRole?: WebAccessibilityRole;
-    accessibilityState?: {
-      busy?: boolean;
-      checked?: boolean | 'mixed';
-      disabled?: boolean;
-      expanded?: boolean;
-      grabbed?: boolean;
-      hidden?: boolean;
-      invalid?: boolean;
-      pressed?: boolean;
-      readonly?: boolean;
-      required?: boolean;
-      selected?: boolean;
-    };
-    href?: string;
-    hrefAttrs?: {
-      target?: '_blank' | '_self' | '_top' | 'blank' | 'self' | 'top';
-      rel?: string;
-      download?: boolean;
-    };
-    onMouseEnter?: (
-      event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    ) => void;
-    onMouseLeave?: (
-      event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    ) => void;
-    onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-    onFocus?: (event: React.FocusEvent<HTMLDivElement>) => void;
-    // For compatibility with RNW internals
-    onMoveShouldSetResponder?: unknown;
-    onMoveShouldSetResponderCapture?: unknown;
-    onResponderEnd?: unknown;
-    onResponderGrant?: unknown;
-    onResponderMove?: unknown;
-    onResponderReject?: unknown;
-    onResponderRelease?: unknown;
-    onResponderStart?: unknown;
-    onResponderTerminate?: unknown;
-    onResponderTerminationRequest?: unknown;
-    onScrollShouldSetResponder?: unknown;
-    onScrollShouldSetResponderCapture?: unknown;
-    onSelectionChangeShouldSetResponder?: unknown;
-    onSelectionChangeShouldSetResponderCapture?: unknown;
-    onStartShouldSetResponder?: unknown;
-    onStartShouldSetResponderCapture?: unknown;
-  }
+  type OverflowValue = 'auto' | 'hidden' | 'scroll' | 'visible';
+  type VisiblilityValue = 'hidden' | 'visible';
 
-  interface TouchableOpacityProps {
-    accessibilityRole?: WebAccessibilityRole;
-    href?: string;
-    hrefAttrs?: {
-      target?: '_blank' | '_self' | '_top' | 'blank' | 'self' | 'top';
-      rel?: string;
-      download?: boolean;
-    };
-    nativeID?: string;
-    onMouseEnter?: (
-      event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    ) => void;
-    onMouseLeave?: (
-      event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    ) => void;
-  }
+  type LayoutStyles = {
+    alignContent?:
+    | 'center'
+    | 'flex-end'
+    | 'flex-start'
+    | 'space-around'
+    | 'space-between'
+    | 'stretch',
+    alignItems?: ?('baseline' | 'center' | 'flex-end' | 'flex-start' | 'stretch'),
+    alignSelf?: ?(
+      | 'auto'
+      | 'baseline'
+      | 'center'
+      | 'flex-end'
+      | 'flex-start'
+      | 'stretch'
+    ),
+    aspectRatio?: ?number,
+    backfaceVisibility?: ?VisiblilityValue,
+    borderWidth?: ?DimensionValue,
+    borderBlockWidth?: ?DimensionValue,
+    borderBlockEndWidth?: ?DimensionValue,
+    borderBlockStartWidth?: ?DimensionValue,
+    borderBottomWidth?: ?DimensionValue,
+    borderInlineWidth?: ?DimensionValue,
+    borderInlineEndWidth?: ?DimensionValue,
+    borderInlineStartWidth?: ?DimensionValue,
+    borderLeftWidth?: ?DimensionValue,
+    borderRightWidth?: ?DimensionValue,
+    borderTopWidth?: ?DimensionValue,
+    bottom?: ?DimensionValue,
+    boxSizing?: ?('border-box' | 'content-box' | 'padding-box'),
+    columnGap?: ?DimensionValue,
+    direction?: ?('inherit' | 'ltr' | 'rtl'),
+    display?: ?string,
+    flex?: ?number,
+    flexBasis?: ?DimensionValue,
+    flexDirection?: ?('column' | 'column-reverse' | 'row' | 'row-reverse'),
+    flexGrow?: ?number,
+    flexShrink?: ?number,
+    flexWrap?: ?('nowrap' | 'wrap' | 'wrap-reverse'),
+    gap?: ?DimensionValue,
+    height?: ?DimensionValue,
+    inset?: ?DimensionValue,
+    insetBlock?: ?DimensionValue,
+    insetBlockEnd?: ?DimensionValue,
+    insetBlockStart?: ?DimensionValue,
+    insetInline?: ?DimensionValue,
+    insetInlineEnd?: ?DimensionValue,
+    insetInlineStart?: ?DimensionValue,
+    justifyContent?: ?(
+      | 'center'
+      | 'flex-end'
+      | 'flex-start'
+      | 'space-around'
+      | 'space-between'
+      | 'space-evenly'
+    ),
+    left?: ?DimensionValue,
+    margin?: ?DimensionValue,
+    marginBlock?: ?DimensionValue,
+    marginBlockEnd?: ?DimensionValue,
+    marginBlockStart?: ?DimensionValue,
+    marginBottom?: ?DimensionValue,
+    marginInline?: ?DimensionValue,
+    marginInlineEnd?: ?DimensionValue,
+    marginInlineStart?: ?DimensionValue,
+    marginLeft?: ?DimensionValue,
+    marginRight?: ?DimensionValue,
+    marginTop?: ?DimensionValue,
+    maxHeight?: ?DimensionValue,
+    maxWidth?: ?DimensionValue,
+    minHeight?: ?DimensionValue,
+    minWidth?: ?DimensionValue,
+    order?: ?number,
+    overflow?: ?OverflowValue,
+    overflowX?: ?OverflowValue,
+    overflowY?: ?OverflowValue,
+    padding?: ?DimensionValue,
+    paddingBlock?: ?DimensionValue,
+    paddingBlockEnd?: ?DimensionValue,
+    paddingBlockStart?: ?DimensionValue,
+    paddingBottom?: ?DimensionValue,
+    paddingInline?: ?DimensionValue,
+    paddingInlineEnd?: ?DimensionValue,
+    paddingInlineStart?: ?DimensionValue,
+    paddingLeft?: ?DimensionValue,
+    paddingRight?: ?DimensionValue,
+    paddingTop?: ?DimensionValue,
+    position?: ?('absolute' | 'fixed' | 'relative' | 'static' | 'sticky'),
+    right?: ?DimensionValue,
+    rowGap?: ?DimensionValue,
+    top?: ?DimensionValue,
+    visibility?: ?VisiblilityValue,
+    width?: ?DimensionValue,
+    zIndex?: ?number,
+    /**
+     * @platform web
+     */
+    gridAutoColumns?: ?string,
+    gridAutoFlow?: ?string,
+    gridAutoRows?: ?string,
+    gridColumnEnd?: ?string,
+    gridColumnGap?: ?string,
+    gridColumnStart?: ?string,
+    gridRowEnd?: ?string,
+    gridRowGap?: ?string,
+    gridRowStart?: ?string,
+    gridTemplateColumns?: ?string,
+    gridTemplateRows?: ?string,
+    gridTemplateAreas?: ?string,
+    /**
+     * @deprecated
+     */
+    borderEndWidth?: ?DimensionValue,
+    borderStartWidth?: ?DimensionValue,
+    end?: ?DimensionValue,
+    marginHorizontal?: ?DimensionValue,
+    marginEnd?: ?DimensionValue,
+    marginStart?: ?DimensionValue,
+    marginVertical?: ?DimensionValue,
+    paddingHorizontal?: ?DimensionValue,
+    paddingStart?: ?DimensionValue,
+    paddingEnd?: ?DimensionValue,
+    paddingVertical?: ?DimensionValue,
+    start?: ?DimensionValue
+  };
 
-  interface CheckBoxProps {
-    color?: string | null;
-  }
+  /**
+   * Shadows
+   */
 
-  interface ViewStyle {
-    cursor?: CursorValue;
-    transitionProperty?: string;
-    display?: 'flex' | 'inline-flex' | 'none';
-    position?: 'relative' | 'absolute' | 'fixed' | 'sticky';
-  }
+  type ShadowStyles = {
+    // @deprecated
+    shadowColor?: ?ColorValue,
+    shadowOffset?: {
+      width?: DimensionValue,
+      height?: DimensionValue
+    },
+    shadowOpacity?: ?number,
+    shadowRadius?: ?DimensionValue
+  };
 
-  interface TextStyle {
-    // The following list is sourced from:
-    // - https://github.com/necolas/react-native-web/blob/0.17.5/packages/react-native-web/src/types/styles.js#L128
-    userSelect?: 'all' | 'auto' | 'contain' | 'none' | 'text';
-  }
+  /**
+   * Transforms
+   */
 
-  interface Source {
-    uri?: string;
-    width?: number;
-    height?: number;
-  }
-
-  interface ImageProps {
-    source: Source | string;
-  }
-
-  interface ImageBackgroundProps {
-    source: Source | string;
-  }
+  type TransformStyles = {
+    perspective?: ?NumberOrString,
+    perspectiveOrigin?: ?string,
+    transform?:
+    | ?string
+    | Array<
+      | {
+        perspective: NumberOrString
+      }
+      | { rotate: string }
+      | { rotateX: string }
+      | { rotateY: string }
+      | { rotateZ: string }
+      | { scale: number }
+      | { scaleX: number }
+      | { scaleY: number }
+      | { scaleZ: number }
+      | { scale3d: string }
+      | { skewX: string }
+      | { skewY: string }
+      | { translateX: NumberOrString }
+      | { translateY: NumberOrString }
+      | { translateZ: NumberOrString }
+      | { translate3d: string }
+    >,
+    transformOrigin?: ?string,
+    transformStyle?: ?('flat' | 'preserve-3d')
+  };
 }
 
-export {};
